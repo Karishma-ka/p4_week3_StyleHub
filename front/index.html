@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Hub - Clothing Shop</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/f4e855eb8f.js" crossorigin="anonymous"></script>
+
+  <style>
+    .search-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 600px;
+      position: relative;
+    }
+
+    #input-form {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .search-button:hover {
+      background-color: #555;
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .dropdown-item {
+      cursor: pointer;
+    }
+
+    .search-results {
+      margin-top: 20px;
+    }
+
+    .result-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <img src="images/IMG-20241230-WA0017.jpg" alt="Website Logo" style="width: 50px; height: auto; margin-right: 10px;">
+        <h1>Style <span>Hub</span></h1>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html" id="home-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="products.html" id="shop-link">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html" id="contact-link">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard.html" id="dashboard-link">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html" id="login-link">Login/Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cart.html" id="cart-link">My-Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="product-details.html" id="product-details-link">Product Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="order-confirmation.html" id="order-confirmation">Order Confirmation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="checkout.html" id="checkout-link">Checkout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="setting.html" id="contact-link">Settings</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Welcome Section -->
+  <section id="home" class="welcome-section">
+    <div class="content">
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <img src="images/IMG-20241230-WA0017.jpg" alt="Website Logo" style="width: 350px; height: auto; margin-right: 150px;">
+        <h2>WELCOME to Style Hub</h2>
+      </div>
+      <p>Discover the latest trends and fashion at Style Hub, your one-stop shop for stylish clothing.</p>
+    </div>
+  </section>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:pink; ">
+  <ul class="navbar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link" href="products.html" id="shop-link">Shop</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="indian wear.html" id="product-details-link">Indian-wear</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="jackets.html" id="order-confirmation">Jacket</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="trendig.html" id="checkout-link">Trending</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="formal.html" id="contact-link">Formals</a>
+    </li>
+  </ul>
+</nav>
+  <!-- Search Bar Section -->
+  <div class="search-container">
+    <input type="text" id="input-form" class="form-control" placeholder="Search for products, brands,and more" aria-label="Search">
+    <button class="search-button" onclick="performSearch()">Search</button>
+    <ul class="dropdown-menu" id="suggestion-list" style="display: none;">
+      <!-- Suggestions will be dynamically populated here -->
+    </ul>
+  </div>
+
+  <!-- Search Results Section -->
+  <section id="search-results" class="container search-results">
+    <h3>Search Results:</h3>
+    <div id="results-container"></div>
+  </section>
+
+  <!-- Featured Products Section -->
+  <img src="images/058b1c4b-e053-4bbe-a07f-4fdb5cd62d22.jpg" alt="welcome-section">
+  <section id="shop" class="featured-products">
+    <h2>Featured Products</h2>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-content">
+      <p>&copy; 2024 Style Hub. All rights reserved.</p>
+      <p>Visit us at:</p>
+      <p><strong>Style Hub</strong><br>1234 Fashion Avenue, Springfield, IL, USA</p>
+      <p>Email: <a href="mailto:support@stylehub.com">support@stylehub.com</a></p>
+      <p>Phone: +1 234 567 890</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const inputForm = document.getElementById('input-form');
+      const resultsContainer = document.getElementById('results-container');
+      const suggestionList = document.getElementById('suggestion-list');
+
+      const products = {
+        'Formal Shirt': 'formal.html',
+        'Casual Jacket': 'jacket.html',
+        'Indian Kurta': 'indianwear.html',
+        'Trending T-shirt': 'trendig.html',
+        'Latest Fashion Jeans': 'trendig.html'
+      };
+
+      inputForm.addEventListener('input', function() {
+        const query = inputForm.value.toLowerCase();
+        suggestionList.innerHTML = ''; // Clear previous suggestions
+        suggestionList.style.display = 'none'; // Hide suggestion list by default
+
+        if (query) {
+          // Filter products based on the query
+          const filteredProducts = Object.keys(products).filter(product => product.toLowerCase().includes(query));
+
+          // Populate suggestions
+          if (filteredProducts.length > 0) {
+            filteredProducts.forEach(product => {
+              const suggestionItem = document.createElement('li');
+              suggestionItem.classList.add('dropdown-item');
+              suggestionItem.textContent = product;
+              suggestionItem.addEventListener('click', () => {
+                inputForm.value = product;
+                suggestionList.innerHTML = ''; // Clear suggestions
+                suggestionList.style.display = 'none'; // Hide suggestion list
+                performSearch();
+              });
+              suggestionList.appendChild(suggestionItem);
+            });
+            suggestionList.style.display = 'block'; // Show suggestion list
+          } else {
+            suggestionList.innerHTML = '<li class="dropdown-item">No suggestions found.</li>';
+            suggestionList.style.display = 'block'; // Show suggestion list
+          }
+        }
+      });
+
+      inputForm.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          performSearch();
+          suggestionList.innerHTML = ''; // Clear suggestions
+          suggestionList.style.display = 'none'; // Hide suggestion list
+        }
+      });
+
+      function performSearch() {
+        const query = inputForm.value;
+        resultsContainer.innerHTML = ''; // Clear previous results
+
+        if (products.hasOwnProperty(query)) {
+          window.location.href = products[query];
+        } else {
+          resultsContainer.innerHTML = '<p>No results found.</p>';
+        }
+      }
+
+      document.querySelector('.search-button').addEventListener('click', function() {
+        performSearch();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>My Dashboard</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </header>
+    <nav class="navbar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="cart.html" class="nav-link">Orders</a>
+        <a href="setting.html" class="nav-link">Settings</a>
+        <a href="login.html" class="nav-link logout-link" onclick="logout()">Logout</a>
+    </nav>
+    <hr>
+    <div class="dashboard-container" id="dashboard-link">
+        <div class="profile-card">
+            <h2>User Profile</h2>
+            <img id="profile-img" src="" alt="Profile Picture" class="profile-img">
+            <form id="upload-form">
+                <input type="file" id="file-input" accept="image/*">
+                <label for="file-input">Choose a Photo</label>
+                <button type="button" onclick="uploadPhoto()">Upload Photo</button>
+            </form>
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Email:</strong> john.doe@example.com</p>
+        </div>
+        <div class="orders-card">
+            <h2>Recent Orders</h2>
+            <ul>
+                <li>Order #12345 - Delivered</li>
+                <li>Order #12346 - Shipped</li>
+                <li>Order #12347 - Processing</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Function to check if a profile image is saved in localStorage and display it
+        function loadProfileImage() {
+            const savedImage = localStorage.getItem('profileImage');
+            if (savedImage) {
+                const profileImg = document.getElementById('profile-img');
+                profileImg.src = savedImage;
+            }
+        }
+
+        // Function to upload a new profile image and save it in localStorage
+        function uploadPhoto() {
+            const fileInput = document.getElementById('file-input');
+            const profileImg = document.getElementById('profile-img');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    profileImg.src = imageData;
+
+                    // Save the image data in localStorage
+                    localStorage.setItem('profileImage', imageData);
+                }
+                
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        // Function to handle user logout
+        function logout() {
+            // Remove the user token from local storage or session storage
+            localStorage.removeItem('token'); // or sessionStorage.removeItem('token');
+
+            // Remove the profile image from localStorage
+            localStorage.removeItem('profileImage');
+
+            // Redirect the user to the login page
+            window.location.href = 'login.html';
+        }
+
+        // Load the profile image when the page loads
+        document.addEventListener('DOMContentLoaded', loadProfileImage);
+    </script>
+</body>
+</html>
